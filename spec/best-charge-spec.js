@@ -45,4 +45,11 @@ describe('Take out food', function () {
     expect(summary).toEqual(expected)
   });
 
+
+  it('should return produceMassage when invoke getProduceMassage and given is String Array', function() {
+    let inputs = ["ITEM0001 x 1", "ITEM0013 x 2", "ITEM0022 x 1"];
+    let summary = getProduceMassage(inputs);
+    let expected = [Object({ id: 'ITEM0001', name: '黄焖鸡', price: 18, count: 1 }), Object({ id: 'ITEM0013', name: '肉夹馍', price: 6, count: 2 }), Object({ id: 'ITEM0022', name: '凉皮', price: 8, count: 1 }) ];
+    expect(summary).toEqual(expected)
+  });
 });
