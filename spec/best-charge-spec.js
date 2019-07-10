@@ -52,4 +52,11 @@ describe('Take out food', function () {
     let expected = [Object({ id: 'ITEM0001', name: '黄焖鸡', price: 18, count: 1 }), Object({ id: 'ITEM0013', name: '肉夹馍', price: 6, count: 2 }), Object({ id: 'ITEM0022', name: '凉皮', price: 8, count: 1 }) ];
     expect(summary).toEqual(expected)
   });
+
+  it('should return promotionWay when invoke getBestPromotions and given is produceMassage Array', function() {
+    let inputs = [Object({ id: 'ITEM0001', name: '黄焖鸡', price: 18, count: 1 }), Object({ id: 'ITEM0013', name: '肉夹馍', price: 6, count: 2 }), Object({ id: 'ITEM0022', name: '凉皮', price: 8, count: 1 }) ];
+    let summary = getBestPromotions(inputs);
+    let expected = Object({ type: '指定菜品半价(黄焖鸡,凉皮)', money: 13 });
+    expect(summary).toEqual(expected)
+  });
 });
