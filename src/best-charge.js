@@ -1,7 +1,8 @@
 function bestCharge(selectedItems) {
   let produceMassage = getProduceMassage(selectedItems);
-  getBestPromotions(produceMassage);
-  return /*TODO*/;
+  let promotionWay = getBestPromotions(produceMassage);
+  let posString = getPosString(produceMassage,promotionWay);
+  return posString;
 }
 
 const getProduceMassage = (selectedItems) =>{
@@ -37,7 +38,7 @@ const getBestPromotions = (produceMassage) =>{
   for(let i =0;i<produceMassage.length;i++){
     sum2 += produceMassage[i].price * produceMassage[i].count;
     if(promotions[1].items.indexOf(produceMassage[i].id)!=-1){
-      halfName += produceMassage[i].name+",";
+      halfName += produceMassage[i].name+"，";
       sum1 += produceMassage[i].price*produceMassage[i].count/2;
     }else{
       sum1 += produceMassage[i].price*produceMassage[i].count;
@@ -58,4 +59,26 @@ const getBestPromotions = (produceMassage) =>{
   }
   console.log(promotionWay);
   return promotionWay;
+}
+
+const getPosString = (produceMassage,promotionWay) => {
+  let sum =0;
+  let posString = "============= 订餐明细 =============\n" ;
+  for(let i = 0;i<produceMassage.length;i++){
+    sum += produceMassage[i].price*produceMassage[i].count;
+    posString += produceMassage[i].name+" x "+produceMassage[i].count+" = "+produceMassage[i].price*produceMassage[i].count+"元\n"
+  }
+  posString +="-----------------------------------\n";
+  if(promotionWay.type != null){
+    posString+="使用优惠:\n";
+    posString+=promotionWay.type+"，省"+promotionWay.money+"元\n";
+    posString +="-----------------------------------\n";
+    posString +="总计："+(sum - parseInt(promotionWay.money))+"元\n"
+  }else{
+    posString +="总计："+sum+"元\n"
+  }
+  posString+="==================================="
+
+  //console.log(posString);
+  return posString;
 }
